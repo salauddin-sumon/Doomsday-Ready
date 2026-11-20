@@ -93,22 +93,32 @@ Three views:
 
 ## Data model
 
+```
+MOVIE                                  CINEMA
++----------------------+               +----------------------+
+| _id        ObjectId  |               | _id        ObjectId  |
+| title      String UK |               | name       String UK |
+| releaseYear Number   |               | bundleSizes Number[] |
+| runtime    Number    |               +----------------------+
+| prerequisites ObjectId[] ----+
+| watched    Boolean   |        |      (1-10 sizes, each 1-500)
++----------------------+        |
+        ^                       |
+        |                       |
+        +---- many-to-many -----+
+        (a movie can require many movies,
+         and be required by many)
+
+UK = unique key
+```
+
+On GitHub the same model is also rendered as a Mermaid diagram:
+
 ```mermaid
-erDiagram
-    MOVIE {
-        ObjectId _id
-        string title UK
-        number releaseYear
-        number runtime
-        ObjectIdArray prerequisites
-        boolean watched
-    }
-    CINEMA {
-        ObjectId _id
-        string name UK
-        numberArray bundleSizes
-    }
-    MOVIE }o--o{ MOVIE : "prerequisites"
+flowchart TD
+    M["MOVIE<br/>_id: ObjectId<br/>title: string UNIQUE<br/>releaseYear: number<br/>runtime: number 1-300<br/>watched: boolean"]
+    C["CINEMA<br/>_id: ObjectId<br/>name: string UNIQUE<br/>bundleSizes: number array 1-10, each 1-500"]
+    M -->|"prerequisites: many-to-many self reference"| M
 ```
 
 `prerequisites` holds ObjectIds referencing other `Movie` documents, so a movie can point to many movies and be pointed to by many. Titles and cinema names are unique indexes.
