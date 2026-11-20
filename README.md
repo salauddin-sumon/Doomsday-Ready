@@ -15,7 +15,7 @@ Start the backend:
 ```bash
 cd backend
 npm install
-copy .env.example .env      # then fill in MONGO_URI
+copy .env.example .env     
 npm run dev
 ```
 
