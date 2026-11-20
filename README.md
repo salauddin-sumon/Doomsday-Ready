@@ -112,14 +112,7 @@ MOVIE                                  CINEMA
 UK = unique key
 ```
 
-On GitHub the same model is also rendered as a Mermaid diagram:
-
-```mermaid
-flowchart TD
-    M["MOVIE<br/>_id: ObjectId<br/>title: string UNIQUE<br/>releaseYear: number<br/>runtime: number 1-300<br/>watched: boolean"]
-    C["CINEMA<br/>_id: ObjectId<br/>name: string UNIQUE<br/>bundleSizes: number array 1-10, each 1-500"]
-    M -->|"prerequisites: many-to-many self reference"| M
-```
+![Doomsday Ready data model](docs/data-model.png)
 
 `prerequisites` holds ObjectIds referencing other `Movie` documents, so a movie can point to many movies and be pointed to by many. Titles and cinema names are unique indexes.
 
