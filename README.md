@@ -112,7 +112,6 @@ MOVIE                                  CINEMA
 UK = unique key
 ```
 
-![Doomsday Ready data model](docs/data-model.png)
 
 `prerequisites` holds ObjectIds referencing other `Movie` documents, so a movie can point to many movies and be pointed to by many. Titles and cinema names are unique indexes.
 
